@@ -24,7 +24,7 @@ def flexfun(tsk):
 		return xx
 	tsk.last_cmd = lst = []
 	lst.extend(to_list(env.FLEX))
-	lst.extend(to_list(env.FLEXFLAGS))
+	lst.extend(to_list(env.FLEXFLAGS) + to_list(getattr(tsk.generator, 'flexflags', [])))
 	inputs = [a.path_from(tsk.get_cwd()) for a in tsk.inputs]
 	if env.FLEX_MSYS:
 		inputs = [x.replace(os.sep, '/') for x in inputs]
